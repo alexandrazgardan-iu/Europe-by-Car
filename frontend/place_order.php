@@ -121,12 +121,13 @@ foreach ($_SESSION['cart'] as $vehicle_id => $quantity) {
 }
 
 
-// Redirect to confirmation page
 
+ // Clear the cart after saving the booking
+$_SESSION['cart'] = [];
+
+// Redirect to confirmation page
 header(
     "Location: order_confirmation.php?booking_id=" . $booking_id
 );
 
 exit;
-
-?>
