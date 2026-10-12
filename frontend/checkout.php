@@ -56,22 +56,27 @@ require_once "../backend/db.php";
             font-size: 14px;
         }
 
-        .confirm-button {
-            width: 100%;
-            margin-top: 10px;
-            padding: 15px;
-            border: none;
-            border-radius: 6px;
-            background-color: #222;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+      
+.confirm-button {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #70543e;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        .confirm-button:hover {
-            background-color: #a58f78;
-        }
+.confirm-button:hover {
+    background-color: #3d342b;
+}
+
+
+     
 
     </style>
 
@@ -141,26 +146,39 @@ require_once "../backend/db.php";
 
         <div class="form-group">
 
-            <label>Pickup Date:</label>
+           
 
-            <input
-                type="date"
-                name="pickup_date"
-                required
-            >
+           
+<div class="form-group">
+    <label for="pickup_date">Pickup Date:</label>
+    <input
+        type="date"
+        id="pickup_date"
+        name="pickup_date"
+        min="<?php echo date('Y-m-d'); ?>"
+        required
+    >
+</div>
+
 
         </div>
 
 
         <div class="form-group">
 
-            <label>Return Date:</label>
 
-            <input
-                type="date"
-                name="return_date"
-                required
-            >
+          
+<div class="form-group">
+    <label for="return_date">Return Date:</label>
+    <input
+        type="date"
+        id="return_date"
+        name="return_date"
+        min="<?php echo date('Y-m-d'); ?>"
+        required
+    >
+</div>
+
 
         </div>
 

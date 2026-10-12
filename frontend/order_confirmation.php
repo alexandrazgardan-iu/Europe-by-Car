@@ -9,13 +9,28 @@ if (!isset($_GET['booking_id'])) {
     exit;
 }
 
-$booking_id = $_GET['booking_id'];
 
-$sql = "SELECT * FROM bookings WHERE booking_id = $booking_id";
+$booking_id = filter_input(INPUT_GET, 'booking_id', FILTER_VALIDATE_INT);
 
-$result = $conn->query($sql);
+if (!$booking_id || $booking_id < 1) {
+    http_response_code(400);
+    exit("Invalid booking ID.");
+}
 
+$stmt = $conn->prepare(
+    "SELECT * FROM bookings WHERE booking_id = ?"
+);
+
+$stmt->bind_param("i", $booking_id);
+$stmt->execute();
+
+$result = $stmt->get_result();
 $booking = $result->fetch_assoc();
+
+if (!$booking) {
+    http_response_code(404);
+    exit("Booking not found.");
+}
 
 ?>
 
@@ -30,28 +45,55 @@ $booking = $result->fetch_assoc();
 
     <style>
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f0e8;
-            padding: 40px;
-        }
+      
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f0e8;
+    color: #3d342b;
+    padding: 40px 20px;
+    margin: 0;
+}
 
-        .confirmation {
-            max-width: 600px;
-            margin: auto;
-            background-color: f5f0e8;
-            padding: 25px;
-            border-radius: 9px;
-        }
+.confirmation {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border: 1px solid #e5ddd3;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
 
-        h1 {
-            color: #222;
-        }
+h1 {
+    color: #70543e;
+    text-align: center;
+    margin-top: 0;
+}
 
-        .total {
-            font-size: 23px;
-            font-weight: bold;
-        }
+.total {
+    font-size: 23px;
+    font-weight: bold;
+    color: #70543e;
+    border-top: 1px solid #e5ddd3;
+    padding-top: 18px;
+    margin-top: 24px;
+}
+
+.confirmation p {
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .confirmation {
+        padding: 20px;
+        margin: 20px auto;
+    }
+}
+
 
     </style>
 
