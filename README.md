@@ -82,3 +82,41 @@ PHP
 JSON
 Ajax
 Database
+
+## Installation and Setup
+
+### Requirements
+- XAMPP with Apache and MySQL
+- A web browser
+- Git (optional, for cloning the repository)
+
+### Setup Instructions
+1. Copy or clone the project into `C:\xampp\htdocs\EuropebyCar`.
+2. Start Apache and MySQL using the XAMPP Control Panel.
+3. Open phpMyAdmin at `http://localhost/phpmyadmin`.
+4. Import `database/schema.sql` using the Import tab.
+5. Make sure the database is named `europebycar`.
+6. Open the application in your browser:
+
+   `http://localhost/EuropebyCar/frontend/catalog.php`
+
+### Database Configuration
+The database connection is configured in `backend/db.php`.
+
+Default local XAMPP settings:
+- Host: `localhost`
+- Database: `europebycar`
+- Username: `root`
+- Password: empty (default local setup)
+
+### Main Features
+- Vehicle catalogue and vehicle details
+- Shopping cart using PHP sessions
+- AJAX Add to Cart functionality
+- Checkout and simulated booking confirmation
+
+### Project Limitations
+- User login is not implemented.
+- Real payment processing is not implemented.
+- Bookings are simulated for demonstration purposes.
+
